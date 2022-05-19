@@ -10,9 +10,9 @@ export function sortCards(cards: ICards){
         deck.push(card)
         deck.push(card)
     }
-    return shuffle(deck)
+    return deck
 }
-function shuffle(array: typeDeck) {
+export function shuffle(array: typeDeck) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1)); // случайный индекс от 0 до i
 

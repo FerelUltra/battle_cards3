@@ -1,8 +1,9 @@
 import styles from './Battle.module.css'
 import {FC} from "react";
 import SvgRocket50 from "../../assets/Rocket50"
+import {Cards} from "../Cards";
 
-export const Index: FC = () => {
+export const Battle: FC = () => {
     return (
         <div className={styles.battle}>
             <div className={styles.rockets}>
@@ -21,7 +22,7 @@ export const Index: FC = () => {
                     </div>
                 </div>
             </div>
-
+            <Cards/>
         </div>
     )
 }

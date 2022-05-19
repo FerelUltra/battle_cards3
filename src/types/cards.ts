@@ -1,8 +1,9 @@
-export interface ICard{
+export interface ICard {
+    type: attackOrDefense
     name: string,
     price: number,
     picture: string,
-    effect: string,
+    effect: typeEffect,
     damage?: number,
     repair?: number,
     plusAttack?: number,
@@ -11,8 +12,14 @@ export interface ICard{
     defenseIncrease?: number,
     defenseGenIncrease?: number
 }
-export interface ICards{
+
+export interface ICards {
     attack: ICard[],
     defense: ICard[]
 }
+
 export type typeDeck = ICard[]
+type attackOrDefense = "attack" | "defense"
+export type typeEffect = "damage" | "radiation" | "attackIncrease" |
+    "attackGenIncrease" | "sabotage" | "materialDecrease" | "repair" | "freeze" | "defenseIncrease" |
+    "teleport" | "defenseGenIncrease"
