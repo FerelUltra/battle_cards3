@@ -7,14 +7,4 @@
 .rockets{
     @apply flex flex-row justify-around
 }
-.myRocket,
-.enemyRocket{
-    @apply flex flex-col
-}
-.healthLine{
-    @apply w-full bg-gray-500 h-16 text-center text-3xl
-}
-.myHealth,
-.enemyHealth{
-    @apply absolute left-0
-}
+
