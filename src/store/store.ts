@@ -1,8 +1,9 @@
 import {configureStore, combineReducers} from "@reduxjs/toolkit";
 import cardsReducer from "./reducers/CardsSlice";
-
+import rocketsReducer from "./reducers/RocketSlice"
 const rootReducer = combineReducers({
-    cardsReducer
+    cardsReducer,
+    rocketsReducer
 })
 export const setupStore = () => {
     return configureStore({
