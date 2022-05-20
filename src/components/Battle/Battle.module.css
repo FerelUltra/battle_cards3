@@ -2,10 +2,10 @@
 @tailwind utilities;
 
 .battle{
-    @apply w-[1920px] h-[1440px] border-2 border-emerald-700 border-solid flex flex-col
+    @apply w-[2920px] h-[1440px] border-2 border-emerald-700 border-solid flex flex-col
 }
 .rockets{
-    @apply flex flex-row justify-between
+    @apply flex flex-row justify-around
 }
 .myRocket,
 .enemyRocket{

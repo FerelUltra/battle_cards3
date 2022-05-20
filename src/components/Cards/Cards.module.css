@@ -1,0 +1,6 @@
+@tailwind components;
+@tailwind utilities;
+
+.cards{
+    @apply flex w-full justify-center mt-32
+}

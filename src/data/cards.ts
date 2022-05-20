@@ -1,6 +1,7 @@
 export const cards = {
     attack: [
         {
+            type: "attack",
             name: "soldier",
             effect: "damage",
             damage: 5,
@@ -8,6 +9,7 @@ export const cards = {
             picture: 'soldier.jpg'
         },
         {
+            type: "attack",
             name: "infantry",
             effect: "damage",
             damage: 10,
@@ -15,6 +17,7 @@ export const cards = {
             picture: "infantry.jpg"
         },
         {
+            type: "attack",
             name: "swat",
             effect: "damage",
             damage: 20,
@@ -22,6 +25,8 @@ export const cards = {
             picture: "swat.jpg"
         },
         {
+            type: "attack",
+
             name: "sniper",
             effect: "damage",
             damage: 15,
@@ -29,6 +34,8 @@ export const cards = {
             picture: "sniper.jpg"
         },
         {
+            type: "attack",
+
             name: "missile",
             effect: "damage",
             damage: 25,
@@ -36,12 +43,16 @@ export const cards = {
             picture: "missile.jpg"
         },
         {
+            type: "attack",
+
             name: "radiation",
             effect: "radiation",
             price: 30,
             picture: "radiation.png"
         },
         {
+            type: "attack",
+
             name: "recruits",
             effect: "attackIncrease",
             plusAttack: 30,
@@ -49,6 +60,8 @@ export const cards = {
             picture: "recruits.jpg"
         },
         {
+            type: "attack",
+
             name: "cartridge",
             effect: "attackGenIncrease",
             price: 30,
@@ -56,12 +69,16 @@ export const cards = {
             picture: "cartridge.jpg"
         },
         {
+            type: "attack",
+
             name: "sabotage",
             effect: "sabotage",
             price: 30,
             picture: "sabotage.jpg"
         },
         {
+            type: "attack",
+
             name: "storage arson",
             effect: "materialDecrease",
             decrease: 45,
@@ -71,6 +88,8 @@ export const cards = {
     ],
     defense: [
         {
+            type: "defense",
+
             name: "patch",
             effect: "repair",
             repair: 5,
@@ -78,6 +97,8 @@ export const cards = {
             price: 5
         },
         {
+            type: "defense",
+
             name: "defense layer",
             effect: "repair",
             repair: 15,
@@ -85,6 +106,8 @@ export const cards = {
             price: 15
         },
         {
+            type: "defense",
+
             name: "nanobots",
             effect: "repair",
             repair: 50,
@@ -92,25 +115,33 @@ export const cards = {
             price: 50
         },
         {
+            type: "defense",
+
             name: "freeze",
             effect: "freeze",
             price: 30,
-            picture: "freeze.jgp"
+            picture: "freeze.jpg"
         },
         {
+            type: "defense",
+
             name: "engineers",
             effect: "defenseIncrease",
             price: 0,
-            picture: "engineers",
+            picture: "engineers.jpg",
             defenseIncrease: 30
         },
         {
+            type: "defense",
+
             name: "teleport",
             effect: "teleport",
             price: 50,
             picture: "teleport.jpg"
         },
         {
+            type: "defense",
+
             name: "technology",
             effect: "defenseGenIncrease",
             price: 30,
