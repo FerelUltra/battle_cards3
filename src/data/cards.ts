@@ -1,4 +1,6 @@
-export const cards = {
+import {ICards} from "../types/cards";
+
+export const cards: ICards = {
     attack: [
         {
             type: "attack",

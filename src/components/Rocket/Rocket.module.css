@@ -1,0 +1,13 @@
+@tailwind components;
+@tailwind utilities;
+
+.rocket{
+    @apply flex flex-row
+}
+.healthLine{
+    @apply w-full bg-gray-500 h-16 text-center text-3xl
+}
+.myHealth,
+.enemyHealth{
+    @apply absolute left-0
+}
