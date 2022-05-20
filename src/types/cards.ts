@@ -6,8 +6,8 @@ export interface ICard {
     effect: typeEffect,
     damage?: number,
     repair?: number,
-    plusAttack?: number,
-    plusAttackGen?: number,
+    attackIncrease?: number,
+    attackGenIncrease?: number,
     decrease?: number,
     defenseIncrease?: number,
     defenseGenIncrease?: number

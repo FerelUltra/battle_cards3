@@ -1,6 +1,6 @@
 import {configureStore, combineReducers} from "@reduxjs/toolkit";
 import cardsReducer from "./reducers/CardsSlice";
-import rocketsReducer from "./reducers/RocketSlice"
+import rocketsReducer from "./reducers/RocketsSlice"
 const rootReducer = combineReducers({
     cardsReducer,
     rocketsReducer

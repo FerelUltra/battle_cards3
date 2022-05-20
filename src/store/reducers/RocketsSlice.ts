@@ -23,20 +23,20 @@ export const rocketsSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        increaseAttack: (state, action) => {
+        attackIncreaseReducer: (state, action) => {
             state.myRocket.attack = state.myRocket.attack + action.payload
         },
-        increaseDefense: (state, action) => {
+        defenseIncreaseReducer: (state, action) => {
             state.myRocket.defense = state.myRocket.defense + action.payload
         },
-        damage: (state, action) => {
+        damageReducer: (state, action) => {
             state.enemyRocket.currentHealth -= action.payload
         },
-        repair: (state, action) => {
+        repairReducer: (state, action) => {
             state.myRocket.currentHealth += action.payload
         },
     },
     extraReducers: {}
 })
-export const {increaseAttack, increaseDefense, repair, damage} = rocketsSlice.actions
+export const {defenseIncreaseReducer, attackIncreaseReducer, repairReducer, damageReducer} = rocketsSlice.actions
 export default rocketsSlice.reducer;

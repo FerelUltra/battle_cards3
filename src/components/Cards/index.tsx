@@ -1,11 +1,10 @@
 import styles from './Cards.module.css'
-import {FC, useEffect, useId} from "react";
+import {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {Card} from "../Card";
 import {shuffleCards} from "../../store/reducers/CardsSlice";
 
 export const Cards: FC = () => {
-    const id = useId()
     const dispatch = useAppDispatch()
     const cards = useAppSelector((state) => state.cardsReducer.allCards)
     const visibleCards = cards.slice(0, 6)
@@ -27,8 +26,8 @@ export const Cards: FC = () => {
                     decrease={card.decrease}
                     defenseGenIncrease={card.defenseGenIncrease}
                     defenseIncrease={card.defenseIncrease}
-                    plusAttack={card.plusAttack}
-                    plusAttackGen={card.plusAttackGen}
+                    attackIncrease={card.attackIncrease}
+                    attackGenIncrease={card.attackGenIncrease}
                     repair={card.repair}
                 />)
             }

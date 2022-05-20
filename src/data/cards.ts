@@ -57,7 +57,7 @@ export const cards: ICards = {
 
             name: "recruits",
             effect: "attackIncrease",
-            plusAttack: 30,
+            attackIncrease: 30,
             price: 0,
             picture: "recruits.jpg"
         },
@@ -67,7 +67,7 @@ export const cards: ICards = {
             name: "cartridge",
             effect: "attackGenIncrease",
             price: 30,
-            plusAttackGen: 1,
+            attackGenIncrease: 1,
             picture: "cartridge.jpg"
         },
         {
