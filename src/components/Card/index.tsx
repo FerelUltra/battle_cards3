@@ -1,10 +1,10 @@
 import styles from './Card.module.css'
-import {FC, useEffect, useState} from "react";
+import {FC, useState} from "react";
 import {ICard} from "../../types/cards";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {
-    damageReducer,
     attackIncreaseReducer,
+    damageReducer,
     defenseIncreaseReducer,
     repairReducer
 } from "../../store/reducers/RocketsSlice";
@@ -27,9 +27,6 @@ export const Card: FC<ICard> = ({
                                     decrease,
                                     index
                                 }) => {
-    useEffect(() => {
-
-    }, [])
     const dispatch = useAppDispatch();
     const allCards = useAppSelector(state => state.cardsReducer.allCards)
     const turn = useAppSelector(state => state.turnReducer.turn)
