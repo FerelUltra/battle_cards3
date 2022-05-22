@@ -2,20 +2,26 @@ import styles from './Cards.module.css'
 import {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {Card} from "../Card";
-import {shuffleCards} from "../../store/reducers/CardsSlice";
+import {setHandCards, shuffleCards} from "../../store/reducers/CardsSlice";
 
 export const Cards: FC = () => {
     const dispatch = useAppDispatch()
-    const cards = useAppSelector((state) => state.cardsReducer.allCards)
-    const visibleCards = cards.slice(0, 6)
-    console.log(visibleCards)
+    const allCards = useAppSelector((state) => state.cardsReducer.allCards)
+    const handCards = useAppSelector((state) => state.cardsReducer.handCards)
+
     useEffect(() => {
         dispatch(shuffleCards())
+
     }, [])
+    useEffect(() => {
+        const visibleCards = allCards.slice(0, 6)
+        dispatch(setHandCards(visibleCards))
+    }, [allCards]);
+
     return (
         <div className={styles.cards}>
             {
-                visibleCards.map((card, index) => <Card
+                handCards.map((card, index) => <Card
                     key={`${index}-${card.name}`}
                     type={card.type}
                     name={card.name}
@@ -29,6 +35,7 @@ export const Cards: FC = () => {
                     attackIncrease={card.attackIncrease}
                     attackGenIncrease={card.attackGenIncrease}
                     repair={card.repair}
+                    index={index}
                 />)
             }
         </div>

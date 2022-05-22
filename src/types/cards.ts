@@ -10,7 +10,8 @@ export interface ICard {
     attackGenIncrease?: number,
     decrease?: number,
     defenseIncrease?: number,
-    defenseGenIncrease?: number
+    defenseGenIncrease?: number,
+    index?: number | undefined
 }
 
 export interface ICards {

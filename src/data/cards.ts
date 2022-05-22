@@ -28,7 +28,6 @@ export const cards: ICards = {
         },
         {
             type: "attack",
-
             name: "sniper",
             effect: "damage",
             damage: 15,
@@ -37,7 +36,6 @@ export const cards: ICards = {
         },
         {
             type: "attack",
-
             name: "missile",
             effect: "damage",
             damage: 25,
@@ -46,7 +44,6 @@ export const cards: ICards = {
         },
         {
             type: "attack",
-
             name: "radiation",
             effect: "radiation",
             price: 30,
@@ -54,7 +51,6 @@ export const cards: ICards = {
         },
         {
             type: "attack",
-
             name: "recruits",
             effect: "attackIncrease",
             attackIncrease: 30,
@@ -63,7 +59,6 @@ export const cards: ICards = {
         },
         {
             type: "attack",
-
             name: "cartridge",
             effect: "attackGenIncrease",
             price: 30,
@@ -72,7 +67,6 @@ export const cards: ICards = {
         },
         {
             type: "attack",
-
             name: "sabotage",
             effect: "sabotage",
             price: 30,
@@ -80,7 +74,6 @@ export const cards: ICards = {
         },
         {
             type: "attack",
-
             name: "storage arson",
             effect: "materialDecrease",
             decrease: 45,
@@ -91,7 +84,6 @@ export const cards: ICards = {
     defense: [
         {
             type: "defense",
-
             name: "patch",
             effect: "repair",
             repair: 5,
@@ -100,7 +92,6 @@ export const cards: ICards = {
         },
         {
             type: "defense",
-
             name: "defense layer",
             effect: "repair",
             repair: 15,
@@ -109,7 +100,6 @@ export const cards: ICards = {
         },
         {
             type: "defense",
-
             name: "nanobots",
             effect: "repair",
             repair: 50,
@@ -118,7 +108,6 @@ export const cards: ICards = {
         },
         {
             type: "defense",
-
             name: "freeze",
             effect: "freeze",
             price: 30,
@@ -126,7 +115,6 @@ export const cards: ICards = {
         },
         {
             type: "defense",
-
             name: "engineers",
             effect: "defenseIncrease",
             price: 0,
@@ -135,7 +123,6 @@ export const cards: ICards = {
         },
         {
             type: "defense",
-
             name: "teleport",
             effect: "teleport",
             price: 50,
@@ -143,7 +130,6 @@ export const cards: ICards = {
         },
         {
             type: "defense",
-
             name: "technology",
             effect: "defenseGenIncrease",
             price: 30,
