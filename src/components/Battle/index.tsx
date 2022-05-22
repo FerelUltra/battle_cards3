@@ -8,7 +8,7 @@ import {Popup} from "../Popup";
 export const Battle: FC = () => {
     const myCurrentHealth = useAppSelector(state => state.rocketsReducer.myRocket.currentHealth)
     const myMaxHealth = useAppSelector(state => state.rocketsReducer.myRocket.maxHealth)
-    const enemyCurrentHealth = useAppSelector(state => state.rocketsReducer.enemyRocket.maxHealth)
+    const enemyCurrentHealth = useAppSelector(state => state.rocketsReducer.enemyRocket.currentHealth)
     const enemyMaxHealth = useAppSelector(state => state.rocketsReducer.enemyRocket.maxHealth)
     return (
         <div className={styles.battle}>
@@ -17,7 +17,8 @@ export const Battle: FC = () => {
                 <Rocket youOrEnemy={"enemy"}/>
             </div>
             <Cards/>
-            <Popup/>
+            {myCurrentHealth >= myMaxHealth || enemyCurrentHealth <= 0 ? <Popup victoryOrLoss={"victory"}/> : null}
+            {myCurrentHealth <= 0 || enemyCurrentHealth >= enemyMaxHealth ? <Popup victoryOrLoss={"loss"}/> : null}
         </div>
     )
 }
