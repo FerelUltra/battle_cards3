@@ -1,6 +1,5 @@
 import styles from './Battle.module.css'
 import {FC} from "react";
-import SvgRocket50 from "../../assets/Rocket50"
 import {Cards} from "../Cards";
 import {Rocket} from "../Rocket";
 
