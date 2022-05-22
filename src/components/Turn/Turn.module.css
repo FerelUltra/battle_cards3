@@ -1,0 +1,7 @@
+@tailwind components;
+@tailwind utilities;
+
+.turn{
+    @apply w-96 h-12 border-solid border-amber-100 bg-sky-900 flex items-center justify-center
+    absolute right-[calc(50%-4em)] top-1 text-5xl uppercase
+}
