@@ -35,8 +35,32 @@ export const rocketsSlice = createSlice({
         repairReducer: (state, action) => {
             state.myRocket.currentHealth += action.payload
         },
+        startNewGame: state => {
+            state.myRocket = {
+                currentHealth: 75,
+                maxHealth: 150,
+                attack: 50,
+                attackGen: 4,
+                defense: 50,
+                defenseGen: 4
+            }
+            state.enemyRocket = {
+                currentHealth: 75,
+                maxHealth: 150,
+                attack: 50,
+                attackGen: 4,
+                defense: 50,
+                defenseGen: 4
+            }
+        }
     },
     extraReducers: {}
 })
-export const {defenseIncreaseReducer, attackIncreaseReducer, repairReducer, damageReducer} = rocketsSlice.actions
+export const {
+    defenseIncreaseReducer,
+    attackIncreaseReducer,
+    repairReducer,
+    damageReducer,
+    startNewGame
+} = rocketsSlice.actions
 export default rocketsSlice.reducer;
