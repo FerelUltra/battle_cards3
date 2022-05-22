@@ -9,7 +9,7 @@ let initialState: ICardsState = {
     handCards: [],
 }
 export const cardsSlice = createSlice({
-    name: 'user',
+    name: 'cards',
     initialState,
     reducers: {
         shuffleCards: state => {

@@ -20,7 +20,7 @@ let initialState: IRocketsState = {
     }
 }
 export const rocketsSlice = createSlice({
-    name: 'user',
+    name: 'rockets',
     initialState,
     reducers: {
         attackIncreaseReducer: (state, action) => {

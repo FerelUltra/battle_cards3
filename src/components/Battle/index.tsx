@@ -4,6 +4,7 @@ import {Cards} from "../Cards";
 import {Rocket} from "../Rocket";
 import {useAppSelector} from "../../hooks/redux";
 import {Popup} from "../Popup";
+import {Turn} from "../Turn";
 
 export const Battle: FC = () => {
     const myCurrentHealth = useAppSelector(state => state.rocketsReducer.myRocket.currentHealth)
@@ -19,6 +20,7 @@ export const Battle: FC = () => {
             <Cards/>
             {myCurrentHealth >= myMaxHealth || enemyCurrentHealth <= 0 ? <Popup victoryOrLoss={"victory"}/> : null}
             {myCurrentHealth <= 0 || enemyCurrentHealth >= enemyMaxHealth ? <Popup victoryOrLoss={"loss"}/> : null}
+            <Turn/>
         </div>
     )
 }
