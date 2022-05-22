@@ -2,7 +2,7 @@
 @tailwind utilities;
 
 .battle{
-    @apply w-[2920px] h-[1440px] border-2 border-emerald-700 border-solid flex flex-col
+    @apply w-[2920px] h-[1440px] border-2 border-emerald-700 border-solid flex flex-col relative
 }
 .rockets{
     @apply flex flex-row justify-around

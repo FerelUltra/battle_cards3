@@ -1,0 +1,26 @@
+@tailwind components;
+@tailwind utilities;
+
+.popup {
+    @apply flex w-1/2 h-1/2 flex-col border-violet-700 border-solid
+    absolute items-center top-1/4 left-1/4
+    bg-sky-900 justify-between
+}
+
+.gameOver {
+    @apply w-1/2 border-amber-100 border-solid text-amber-50 uppercase flex items-center justify-center
+    -mt-8 h-12 text-5xl bg-indigo-500 border-8
+}
+
+.gameOverText {
+    @apply w-full bg-gray-500 text-yellow-400 uppercase h-1/2 flex items-center justify-center
+    text-5xl
+}
+
+.repeatGame {
+    @apply w-1/4 uppercase text-amber-50 h-1/6 text-5xl bg-green-900
+}
+
+.repeatGame:hover {
+    @apply text-yellow-400 shadow-2xl shadow-amber-500
+}
