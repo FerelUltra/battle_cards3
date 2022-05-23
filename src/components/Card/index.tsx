@@ -19,6 +19,7 @@ export const Card: FC<ICard> = ({
                                     name,
                                     picture,
                                     price,
+                                    description,
                                     damage,
                                     defenseGenIncrease,
                                     defenseIncrease,
@@ -42,7 +43,8 @@ export const Card: FC<ICard> = ({
         effect,
         defenseGenIncrease,
         decrease,
-        type
+        type,
+        description
     }
     const dispatch = useAppDispatch();
     const allCards = useAppSelector(state => state.cardsReducer.allCards)
@@ -85,7 +87,7 @@ export const Card: FC<ICard> = ({
     const nothing = () => {
         return null
     }
-    const passTurn = (event: MouseEvent<HTMLDivElement>) =>{
+    const passTurn = (event: MouseEvent<HTMLDivElement>) => {
         event.stopPropagation()
         dispatch(setLastMyCard(pass))
         dispatch(changeTurn())
@@ -104,11 +106,14 @@ export const Card: FC<ICard> = ({
             <header className={styles.cardHeader} style={{
                 backgroundColor: `${type === "attack" ? "red" : "blue"}`,
                 opacity: 0.8
-            }}>{name}</header>
+            }}>
+                <span className={styles.name}>{name}</span>
+                <span className={styles.price}>{price}</span>
+            </header>
             <footer className={styles.cardFooter} style={{
                 backgroundColor: `${type === "attack" ? "red" : "blue"}`,
                 opacity: 0.8
-            }}>{type === "attack" ? `${price} attack` : `${price} defense`}</footer>
+            }}>{description}</footer>
             {inOrOut ? <div className={styles.pass} onClick={passTurn}>Pass</div> : null}
         </div>
     )

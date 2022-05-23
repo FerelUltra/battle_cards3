@@ -20,21 +20,23 @@ export const LastCards: FC = () => {
                                 decrease={lastMyCard.decrease}
                                 attackGenIncrease={lastMyCard.attackGenIncrease}
                                 attackIncrease={lastMyCard.attackIncrease}
+                                description={lastMyCard.description}
                                 used={"used"}
             /> : null}
             {lastEnemyCard ? <Card type={lastEnemyCard.type}
-                                picture={lastEnemyCard.picture}
-                                effect={lastEnemyCard.effect}
-                                name={lastEnemyCard.name}
-                                price={lastEnemyCard.price}
-                                repair={lastEnemyCard.repair}
-                                defenseIncrease={lastEnemyCard.defenseIncrease}
-                                defenseGenIncrease={lastEnemyCard.defenseGenIncrease}
-                                damage={lastEnemyCard.damage}
-                                decrease={lastEnemyCard.decrease}
-                                attackGenIncrease={lastEnemyCard.attackGenIncrease}
-                                attackIncrease={lastEnemyCard.attackIncrease}
-                                used={"used"}
+                                   picture={lastEnemyCard.picture}
+                                   effect={lastEnemyCard.effect}
+                                   name={lastEnemyCard.name}
+                                   price={lastEnemyCard.price}
+                                   repair={lastEnemyCard.repair}
+                                   defenseIncrease={lastEnemyCard.defenseIncrease}
+                                   defenseGenIncrease={lastEnemyCard.defenseGenIncrease}
+                                   damage={lastEnemyCard.damage}
+                                   decrease={lastEnemyCard.decrease}
+                                   attackGenIncrease={lastEnemyCard.attackGenIncrease}
+                                   attackIncrease={lastEnemyCard.attackIncrease}
+                                   description={lastEnemyCard.description}
+                                   used={"used"}
             /> : null}
         </div>
     )

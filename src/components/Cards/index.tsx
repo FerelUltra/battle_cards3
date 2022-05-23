@@ -36,6 +36,7 @@ export const Cards: FC = () => {
                     attackGenIncrease={card.attackGenIncrease}
                     repair={card.repair}
                     index={index}
+                    description={card.description}
                 />)
             }
         </div>

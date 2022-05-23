@@ -3,6 +3,7 @@ export interface ICard {
     name: string,
     price: number,
     picture: string,
+    description: string,
     effect: typeEffect,
     damage?: number,
     repair?: number,
