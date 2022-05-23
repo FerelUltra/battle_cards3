@@ -6,7 +6,7 @@ import {
     attackIncreaseReducer,
     damageReducer,
     defenseIncreaseReducer,
-    repairReducer
+    repairReducer, wasteAttackReducer, wasteDefenseReducer
 } from "../../store/reducers/RocketsSlice";
 import {replaceCard, setLastMyCard} from "../../store/reducers/CardsSlice";
 import {getRandomArrayElement} from "../../helpers/randomElement";
@@ -49,6 +49,8 @@ export const Card: FC<ICard> = ({
     const dispatch = useAppDispatch();
     const allCards = useAppSelector(state => state.cardsReducer.allCards)
     const turn = useAppSelector(state => state.turnReducer.turn)
+    const defense = useAppSelector(state => state.rocketsReducer.myRocket.defense)
+    const attack = useAppSelector(state => state.rocketsReducer.myRocket.attack)
     const [randomCard, setRandomCard] = useState(getRandomArrayElement(allCards));
     const [inOrOut, setInOrOut] = useState(false)
     const mouseEnterHandler = () => {
@@ -58,7 +60,10 @@ export const Card: FC<ICard> = ({
         setInOrOut(false)
     }
     const cardClick = () => {
-        if (turn === "youTurn") {
+        if (turn === "youTurn" && (
+            type === "defense" && defense >= price ||
+            type === "attack" && attack >= price
+        )) {
             switch (effect) {
                 case "damage":
                     dispatch(damageReducer(damage))
@@ -82,6 +87,9 @@ export const Card: FC<ICard> = ({
                 dispatch(replaceCard({index, randomCard}))
             }
             dispatch(changeTurn())
+            type === "defense" ?
+                dispatch(wasteDefenseReducer(price)) :
+                dispatch(wasteAttackReducer(price))
         }
     }
     const nothing = () => {
@@ -101,7 +109,9 @@ export const Card: FC<ICard> = ({
              style={{
                  backgroundImage: `url(${picture})`,
                  backgroundSize: "cover",
-                 backgroundRepeat: "no-repeat"
+                 backgroundRepeat: "no-repeat",
+                 opacity: `${type === "attack" && attack >= price ||
+                 type === "defense" && defense >= price || used === "used" ? "0.8" : "0.3"}`
              }}>
             <header className={styles.cardHeader} style={{
                 backgroundColor: `${type === "attack" ? "red" : "blue"}`,
@@ -114,7 +124,7 @@ export const Card: FC<ICard> = ({
                 backgroundColor: `${type === "attack" ? "red" : "blue"}`,
                 opacity: 0.8
             }}>{description}</footer>
-            {inOrOut ? <div className={styles.pass} onClick={passTurn}>Pass</div> : null}
+            {inOrOut && used !== "used" ? <div className={styles.pass} onClick={passTurn}>Pass</div> : null}
         </div>
     )
 }

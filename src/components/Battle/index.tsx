@@ -10,11 +10,12 @@ import {
     enemyAttackIncreaseReducer,
     enemyDamageReducer,
     enemyDefenseIncreaseReducer,
-    enemyRepairReducer
+    enemyRepairReducer, enemyWasteAttackReducer, enemyWasteDefenseReducer, wasteAttackReducer, wasteDefenseReducer
 } from "../../store/reducers/RocketsSlice";
 import {changeTurn} from "../../store/reducers/TurnSlice";
 import {LastCards} from "../LastCards";
 import {setLastEnemyCard} from "../../store/reducers/CardsSlice";
+import {pass} from "../../data/cards";
 
 export const Battle: FC = () => {
     const myCurrentHealth = useAppSelector(state => state.rocketsReducer.myRocket.currentHealth)
@@ -23,13 +24,18 @@ export const Battle: FC = () => {
     const enemyMaxHealth = useAppSelector(state => state.rocketsReducer.enemyRocket.maxHealth)
     const turn = useAppSelector(state => state.turnReducer.turn)
     const enemyCards = useAppSelector(state => state.cardsReducer.enemyCards)
-
+    const enemyDefense = useAppSelector(state => state.rocketsReducer.enemyRocket.defense)
+    const enemyAttack = useAppSelector(state => state.rocketsReducer.enemyRocket.attack)
     const dispatch = useAppDispatch();
     useEffect(() => {
         const delay = 500
+        const randomEnemyCard = getRandomArrayElement(enemyCards)
         let enemyThinksTimer = setTimeout(() => {
-            if (turn === "enemyTurn") {
-                const randomEnemyCard = getRandomArrayElement(enemyCards)
+            if (turn === "enemyTurn" && (
+                randomEnemyCard.type === "defense" && enemyDefense >= randomEnemyCard.price ||
+                randomEnemyCard.type === "attack" && enemyAttack >= randomEnemyCard.price
+            )) {
+
                 switch (randomEnemyCard.effect) {
                     case "damage":
                         dispatch(enemyDamageReducer(randomEnemyCard.damage))
@@ -44,6 +50,12 @@ export const Battle: FC = () => {
                         dispatch(enemyDefenseIncreaseReducer(randomEnemyCard.defenseIncrease))
                 }
                 dispatch(setLastEnemyCard(randomEnemyCard))
+                dispatch(changeTurn())
+                randomEnemyCard.type === "defense" ?
+                    dispatch(enemyWasteDefenseReducer(randomEnemyCard.price)) :
+                    dispatch(enemyWasteAttackReducer(randomEnemyCard.price))
+            } else if(turn === "enemyTurn"){
+                dispatch(setLastEnemyCard(pass))
                 dispatch(changeTurn())
             }
         }, delay)

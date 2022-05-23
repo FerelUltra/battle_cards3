@@ -35,6 +35,12 @@ export const rocketsSlice = createSlice({
         repairReducer: (state, action) => {
             state.myRocket.currentHealth += action.payload
         },
+        wasteAttackReducer: (state, action) =>{
+          state.myRocket.attack -= action.payload
+        },
+        wasteDefenseReducer: (state, action) =>{
+          state.myRocket.defense -= action.payload
+        },
         startNewGame: state => {
             state.myRocket = {
                 currentHealth: 75,
@@ -65,6 +71,12 @@ export const rocketsSlice = createSlice({
         enemyRepairReducer: (state, action) => {
             state.enemyRocket.currentHealth += action.payload
         },
+        enemyWasteAttackReducer: (state, action) =>{
+            state.enemyRocket.attack -= action.payload
+        },
+        enemyWasteDefenseReducer: (state, action) =>{
+            state.enemyRocket.defense -= action.payload
+        },
     },
     extraReducers: {}
 })
@@ -77,6 +89,10 @@ export const {
     enemyDamageReducer,
     enemyRepairReducer,
     enemyDefenseIncreaseReducer,
-    enemyAttackIncreaseReducer
+    enemyAttackIncreaseReducer,
+    wasteDefenseReducer,
+    wasteAttackReducer,
+    enemyWasteDefenseReducer,
+    enemyWasteAttackReducer
 } = rocketsSlice.actions
 export default rocketsSlice.reducer;
