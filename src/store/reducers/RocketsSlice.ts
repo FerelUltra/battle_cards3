@@ -8,7 +8,8 @@ let initialState: IRocketsState = {
         attack: 50,
         attackGen: 4,
         defense: 50,
-        defenseGen: 4
+        defenseGen: 4,
+        bombed: false
     },
     enemyRocket: {
         currentHealth: 75,
@@ -16,7 +17,8 @@ let initialState: IRocketsState = {
         attack: 50,
         attackGen: 4,
         defense: 50,
-        defenseGen: 4
+        defenseGen: 4,
+        bombed: false
     }
 }
 export const rocketsSlice = createSlice({
@@ -35,11 +37,32 @@ export const rocketsSlice = createSlice({
         repairReducer: (state, action) => {
             state.myRocket.currentHealth += action.payload
         },
-        wasteAttackReducer: (state, action) =>{
-          state.myRocket.attack -= action.payload
+        wasteAttackReducer: (state, action) => {
+            state.myRocket.attack -= action.payload
         },
-        wasteDefenseReducer: (state, action) =>{
-          state.myRocket.defense -= action.payload
+        wasteDefenseReducer: (state, action) => {
+            state.myRocket.defense -= action.payload
+        },
+        attackGenIncreaseReducer: (state, action) => {
+            state.myRocket.attackGen += action.payload
+        },
+        defenseGenIncreaseReducer: (state, action) => {
+            state.myRocket.defenseGen += action.payload
+        },
+        materialDecreaseReducer: state => {
+            state.enemyRocket.defense = Math.round(0.6 * state.enemyRocket.defense)
+            state.enemyRocket.attack = Math.round(0.6 * state.enemyRocket.attack)
+        },
+        teleportReducer: state =>{
+            const defensePart = Math.round(0.3 * state.enemyRocket.defense)
+            const attackPart = Math.round(0.3 * state.enemyRocket.attack)
+            state.myRocket.defense += defensePart
+            state.myRocket.attack += attackPart
+            state.enemyRocket.defense -= defensePart
+            state.enemyRocket.attack -= attackPart
+        },
+        sabotageReducer: (state, action) =>{
+          state.enemyRocket.bombed = action.payload
         },
         startNewGame: state => {
             state.myRocket = {
@@ -48,7 +71,8 @@ export const rocketsSlice = createSlice({
                 attack: 50,
                 attackGen: 4,
                 defense: 50,
-                defenseGen: 4
+                defenseGen: 4,
+                bombed: false
             }
             state.enemyRocket = {
                 currentHealth: 75,
@@ -56,10 +80,11 @@ export const rocketsSlice = createSlice({
                 attack: 50,
                 attackGen: 4,
                 defense: 50,
-                defenseGen: 4
+                defenseGen: 4,
+                bombed: false
             }
         },
-        addTurnMaterial: (state)=>{
+        addTurnMaterial: (state) => {
             state.enemyRocket.attack += state.enemyRocket.attackGen
             state.myRocket.attack += state.myRocket.attackGen
             state.myRocket.defense += state.myRocket.defenseGen
@@ -77,11 +102,32 @@ export const rocketsSlice = createSlice({
         enemyRepairReducer: (state, action) => {
             state.enemyRocket.currentHealth += action.payload
         },
-        enemyWasteAttackReducer: (state, action) =>{
+        enemyWasteAttackReducer: (state, action) => {
             state.enemyRocket.attack -= action.payload
         },
-        enemyWasteDefenseReducer: (state, action) =>{
+        enemyWasteDefenseReducer: (state, action) => {
             state.enemyRocket.defense -= action.payload
+        },
+        enemyAttackGenIncreaseReducer: (state, action) => {
+            state.enemyRocket.attackGen += action.payload
+        },
+        enemyDefenseGenIncreaseReducer: (state, action) => {
+            state.enemyRocket.defenseGen += action.payload
+        },
+        enemyMaterialDecreaseReducer: state => {
+            state.myRocket.defense = Math.round(0.6 * state.myRocket.defense)
+            state.myRocket.attack = Math.round(0.6 * state.myRocket.attack)
+        },
+        enemyTeleportReducer: state =>{
+            const defensePart = Math.round(0.3 * state.myRocket.defense)
+            const attackPart = Math.round(0.3 * state.myRocket.attack)
+            state.enemyRocket.defense += defensePart
+            state.enemyRocket.attack += attackPart
+            state.myRocket.defense -= defensePart
+            state.myRocket.attack -= attackPart
+        },
+        enemySabotageReducer: (state, action) =>{
+            state.myRocket.bombed = action.payload
         },
     },
     extraReducers: {}
@@ -100,6 +146,16 @@ export const {
     wasteAttackReducer,
     enemyWasteDefenseReducer,
     enemyWasteAttackReducer,
-    addTurnMaterial
+    addTurnMaterial,
+    defenseGenIncreaseReducer,
+    enemyDefenseGenIncreaseReducer,
+    attackGenIncreaseReducer,
+    enemyAttackGenIncreaseReducer,
+    enemyMaterialDecreaseReducer,
+    materialDecreaseReducer,
+    teleportReducer,
+    enemyTeleportReducer,
+    sabotageReducer,
+    enemySabotageReducer
 } = rocketsSlice.actions
 export default rocketsSlice.reducer;

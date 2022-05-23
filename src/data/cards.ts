@@ -85,9 +85,9 @@ export const cards: ICards = {
             type: "attack",
             name: "storage arson",
             effect: "materialDecrease",
-            decrease: 45,
+            decrease: 40,
             picture: "arson.jpg",
-            price: 40,
+            price: 20,
             description: "-40% materials"
         }
     ],
@@ -142,7 +142,7 @@ export const cards: ICards = {
             type: "defense",
             name: "teleport",
             effect: "teleport",
-            price: 50,
+            price: 20,
             picture: "teleport.jpg",
             description: "steal 30%"
         },

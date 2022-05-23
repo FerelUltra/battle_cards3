@@ -8,10 +8,19 @@ import {Turn} from "../Turn";
 import {getRandomArrayElement} from "../../helpers/randomElement";
 import {
     addTurnMaterial,
+    damageReducer,
+    enemyAttackGenIncreaseReducer,
     enemyAttackIncreaseReducer,
     enemyDamageReducer,
+    enemyDefenseGenIncreaseReducer,
     enemyDefenseIncreaseReducer,
-    enemyRepairReducer, enemyWasteAttackReducer, enemyWasteDefenseReducer, wasteAttackReducer, wasteDefenseReducer
+    enemyMaterialDecreaseReducer,
+    enemyRepairReducer,
+    enemySabotageReducer,
+    enemyTeleportReducer,
+    enemyWasteAttackReducer,
+    enemyWasteDefenseReducer,
+    sabotageReducer
 } from "../../store/reducers/RocketsSlice";
 import {changeTurn} from "../../store/reducers/TurnSlice";
 import {LastCards} from "../LastCards";
@@ -27,6 +36,7 @@ export const Battle: FC = () => {
     const enemyCards = useAppSelector(state => state.cardsReducer.enemyCards)
     const enemyDefense = useAppSelector(state => state.rocketsReducer.enemyRocket.defense)
     const enemyAttack = useAppSelector(state => state.rocketsReducer.enemyRocket.attack)
+    const bombed = useAppSelector(state => state.rocketsReducer.enemyRocket.bombed)
     const dispatch = useAppDispatch();
     useEffect(() => {
         const delay = 500
@@ -42,13 +52,30 @@ export const Battle: FC = () => {
                         dispatch(enemyDamageReducer(randomEnemyCard.damage))
                         break
                     case "repair":
-                        dispatch(enemyRepairReducer(randomEnemyCard.repair))
+                        bombed ? dispatch(damageReducer(5)) :dispatch(enemyRepairReducer(randomEnemyCard.repair))
+                        dispatch(sabotageReducer(false))
                         break
                     case "attackIncrease":
                         dispatch(enemyAttackIncreaseReducer(randomEnemyCard.attackIncrease))
                         break
                     case "defenseIncrease":
                         dispatch(enemyDefenseIncreaseReducer(randomEnemyCard.defenseIncrease))
+                        break
+                    case "attackGenIncrease":
+                        dispatch(enemyAttackGenIncreaseReducer(randomEnemyCard.attackGenIncrease))
+                        break
+                    case "defenseGenIncrease":
+                        dispatch(enemyDefenseGenIncreaseReducer(randomEnemyCard.defenseGenIncrease))
+                        break
+                    case "materialDecrease":
+                        dispatch(enemyMaterialDecreaseReducer())
+                        break
+                    case "teleport":
+                        dispatch(enemyTeleportReducer())
+                        break
+                    case "sabotage":
+                        dispatch(enemySabotageReducer(true))
+                        break
                 }
                 dispatch(setLastEnemyCard(randomEnemyCard))
                 dispatch(changeTurn())
@@ -56,7 +83,7 @@ export const Battle: FC = () => {
                 randomEnemyCard.type === "defense" ?
                     dispatch(enemyWasteDefenseReducer(randomEnemyCard.price)) :
                     dispatch(enemyWasteAttackReducer(randomEnemyCard.price))
-            } else if(turn === "enemyTurn"){
+            } else if (turn === "enemyTurn") {
                 dispatch(setLastEnemyCard(pass))
                 dispatch(changeTurn())
                 dispatch(addTurnMaterial())

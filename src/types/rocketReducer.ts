@@ -4,7 +4,8 @@ export interface IRocketState{
     attack: number,
     attackGen: number,
     defense: number,
-    defenseGen: number
+    defenseGen: number,
+    bombed: boolean
 }
 export interface IRocketsState{
     myRocket: IRocketState,
