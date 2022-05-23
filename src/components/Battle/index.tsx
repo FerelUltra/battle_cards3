@@ -26,7 +26,7 @@ export const Battle: FC = () => {
 
     const dispatch = useAppDispatch();
     useEffect(() => {
-        const delay = 3000
+        const delay = 500
         let enemyThinksTimer = setTimeout(() => {
             if (turn === "enemyTurn") {
                 const randomEnemyCard = getRandomArrayElement(enemyCards)

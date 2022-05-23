@@ -1,4 +1,4 @@
-import {ICards} from "../types/cards";
+import {ICards, ICard} from "../types/cards";
 
 export const cards: ICards = {
     attack: [
@@ -137,4 +137,11 @@ export const cards: ICards = {
             defenseGenIncrease: 1
         }
     ]
+}
+export const pass: ICard = {
+    type: "defense",
+    name: "pass",
+    effect: "no",
+    price: 0,
+    picture: "pass.jpg"
 }

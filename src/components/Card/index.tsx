@@ -1,5 +1,5 @@
 import styles from './Card.module.css'
-import {FC, useState} from "react";
+import {FC, MouseEventHandler, useState} from "react";
 import {ICard} from "../../types/cards";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {
@@ -11,6 +11,8 @@ import {
 import {replaceCard, setLastMyCard} from "../../store/reducers/CardsSlice";
 import {getRandomArrayElement} from "../../helpers/randomElement";
 import {changeTurn} from "../../store/reducers/TurnSlice";
+import {pass} from "../../data/cards";
+import {MouseEvent} from "react";
 
 export const Card: FC<ICard> = ({
                                     type,
@@ -46,6 +48,13 @@ export const Card: FC<ICard> = ({
     const allCards = useAppSelector(state => state.cardsReducer.allCards)
     const turn = useAppSelector(state => state.turnReducer.turn)
     const [randomCard, setRandomCard] = useState(getRandomArrayElement(allCards));
+    const [inOrOut, setInOrOut] = useState(false)
+    const mouseEnterHandler = () => {
+        setInOrOut(true)
+    }
+    const mouseLeaveHandler = () => {
+        setInOrOut(false)
+    }
     const cardClick = () => {
         if (turn === "youTurn") {
             switch (effect) {
@@ -76,9 +85,17 @@ export const Card: FC<ICard> = ({
     const nothing = () => {
         return null
     }
+    const passTurn = (event: MouseEvent<HTMLDivElement>) =>{
+        event.stopPropagation()
+        dispatch(setLastMyCard(pass))
+        dispatch(changeTurn())
+        dispatch(replaceCard({index, randomCard}))
+    }
     return (
         <div className={styles.card}
              onClick={used === "used" ? nothing : cardClick}
+             onMouseEnter={mouseEnterHandler}
+             onMouseLeave={mouseLeaveHandler}
              style={{
                  backgroundImage: `url(${picture})`,
                  backgroundSize: "cover",
@@ -92,6 +109,7 @@ export const Card: FC<ICard> = ({
                 backgroundColor: `${type === "attack" ? "red" : "blue"}`,
                 opacity: 0.8
             }}>{type === "attack" ? `${price} attack` : `${price} defense`}</footer>
+            {inOrOut ? <div className={styles.pass} onClick={passTurn}>Pass</div> : null}
         </div>
     )
 }

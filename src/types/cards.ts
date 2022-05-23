@@ -24,5 +24,5 @@ export type typeDeck = ICard[]
 type attackOrDefense = "attack" | "defense"
 export type typeEffect = "damage" | "radiation" | "attackIncrease" |
     "attackGenIncrease" | "sabotage" | "materialDecrease" | "repair" | "freeze" | "defenseIncrease" |
-    "teleport" | "defenseGenIncrease"
+    "teleport" | "defenseGenIncrease" | "no"
 type typeUsed = "used" | "notUsed"
