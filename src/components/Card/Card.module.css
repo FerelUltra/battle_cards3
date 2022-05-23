@@ -12,9 +12,15 @@
 
 .cardHeader,
 .cardFooter {
-    @apply w-full flex justify-center items-center text-amber-50 h-1/6 text-6xl
+    @apply w-full flex justify-center items-center text-amber-50 h-1/6 text-6xl justify-between
 }
 
 .cardFooter {
     @apply absolute bottom-0
+}
+.pass{
+    @apply absolute w-1/2 -bottom-16 bg-sky-900 text-amber-50 text-6xl left-1/4 uppercase flex justify-center
+}
+.pass:hover{
+    @apply text-yellow-400
 }

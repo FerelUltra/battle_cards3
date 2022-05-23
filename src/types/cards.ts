@@ -3,6 +3,7 @@ export interface ICard {
     name: string,
     price: number,
     picture: string,
+    description: string,
     effect: typeEffect,
     damage?: number,
     repair?: number,
@@ -24,5 +25,5 @@ export type typeDeck = ICard[]
 type attackOrDefense = "attack" | "defense"
 export type typeEffect = "damage" | "radiation" | "attackIncrease" |
     "attackGenIncrease" | "sabotage" | "materialDecrease" | "repair" | "freeze" | "defenseIncrease" |
-    "teleport" | "defenseGenIncrease"
+    "teleport" | "defenseGenIncrease" | "no"
 type typeUsed = "used" | "notUsed"

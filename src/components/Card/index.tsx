@@ -1,22 +1,25 @@
 import styles from './Card.module.css'
-import {FC, useState} from "react";
+import {FC, MouseEventHandler, useState} from "react";
 import {ICard} from "../../types/cards";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {
     attackIncreaseReducer,
     damageReducer,
     defenseIncreaseReducer,
-    repairReducer
+    repairReducer, wasteAttackReducer, wasteDefenseReducer
 } from "../../store/reducers/RocketsSlice";
 import {replaceCard, setLastMyCard} from "../../store/reducers/CardsSlice";
 import {getRandomArrayElement} from "../../helpers/randomElement";
 import {changeTurn} from "../../store/reducers/TurnSlice";
+import {pass} from "../../data/cards";
+import {MouseEvent} from "react";
 
 export const Card: FC<ICard> = ({
                                     type,
                                     name,
                                     picture,
                                     price,
+                                    description,
                                     damage,
                                     defenseGenIncrease,
                                     defenseIncrease,
@@ -40,14 +43,27 @@ export const Card: FC<ICard> = ({
         effect,
         defenseGenIncrease,
         decrease,
-        type
+        type,
+        description
     }
     const dispatch = useAppDispatch();
     const allCards = useAppSelector(state => state.cardsReducer.allCards)
     const turn = useAppSelector(state => state.turnReducer.turn)
+    const defense = useAppSelector(state => state.rocketsReducer.myRocket.defense)
+    const attack = useAppSelector(state => state.rocketsReducer.myRocket.attack)
     const [randomCard, setRandomCard] = useState(getRandomArrayElement(allCards));
+    const [inOrOut, setInOrOut] = useState(false)
+    const mouseEnterHandler = () => {
+        setInOrOut(true)
+    }
+    const mouseLeaveHandler = () => {
+        setInOrOut(false)
+    }
     const cardClick = () => {
-        if (turn === "youTurn") {
+        if (turn === "youTurn" && (
+            type === "defense" && defense >= price ||
+            type === "attack" && attack >= price
+        )) {
             switch (effect) {
                 case "damage":
                     dispatch(damageReducer(damage))
@@ -71,27 +87,44 @@ export const Card: FC<ICard> = ({
                 dispatch(replaceCard({index, randomCard}))
             }
             dispatch(changeTurn())
+            type === "defense" ?
+                dispatch(wasteDefenseReducer(price)) :
+                dispatch(wasteAttackReducer(price))
         }
     }
     const nothing = () => {
         return null
     }
+    const passTurn = (event: MouseEvent<HTMLDivElement>) => {
+        event.stopPropagation()
+        dispatch(setLastMyCard(pass))
+        dispatch(changeTurn())
+        dispatch(replaceCard({index, randomCard}))
+    }
     return (
         <div className={styles.card}
              onClick={used === "used" ? nothing : cardClick}
+             onMouseEnter={mouseEnterHandler}
+             onMouseLeave={mouseLeaveHandler}
              style={{
                  backgroundImage: `url(${picture})`,
                  backgroundSize: "cover",
-                 backgroundRepeat: "no-repeat"
+                 backgroundRepeat: "no-repeat",
+                 opacity: `${type === "attack" && attack >= price ||
+                 type === "defense" && defense >= price || used === "used" ? "0.8" : "0.3"}`
              }}>
             <header className={styles.cardHeader} style={{
                 backgroundColor: `${type === "attack" ? "red" : "blue"}`,
                 opacity: 0.8
-            }}>{name}</header>
+            }}>
+                <span className={styles.name}>{name}</span>
+                <span className={styles.price}>{price}</span>
+            </header>
             <footer className={styles.cardFooter} style={{
                 backgroundColor: `${type === "attack" ? "red" : "blue"}`,
                 opacity: 0.8
-            }}>{type === "attack" ? `${price} attack` : `${price} defense`}</footer>
+            }}>{description}</footer>
+            {inOrOut && used !== "used" ? <div className={styles.pass} onClick={passTurn}>Pass</div> : null}
         </div>
     )
 }
