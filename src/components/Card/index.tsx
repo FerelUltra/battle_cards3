@@ -8,7 +8,7 @@ import {
     defenseIncreaseReducer,
     repairReducer
 } from "../../store/reducers/RocketsSlice";
-import {replaceCard} from "../../store/reducers/CardsSlice";
+import {replaceCard, setLastMyCard} from "../../store/reducers/CardsSlice";
 import {getRandomArrayElement} from "../../helpers/randomElement";
 import {changeTurn} from "../../store/reducers/TurnSlice";
 
@@ -25,8 +25,23 @@ export const Card: FC<ICard> = ({
                                     repair,
                                     attackGenIncrease,
                                     decrease,
-                                    index
+                                    index,
+                                    used
                                 }) => {
+    const props = {
+        name,
+        picture,
+        price,
+        damage,
+        attackIncrease,
+        repair,
+        attackGenIncrease,
+        defenseIncrease,
+        effect,
+        defenseGenIncrease,
+        decrease,
+        type
+    }
     const dispatch = useAppDispatch();
     const allCards = useAppSelector(state => state.cardsReducer.allCards)
     const turn = useAppSelector(state => state.turnReducer.turn)
@@ -48,18 +63,22 @@ export const Card: FC<ICard> = ({
             }
             //maybe not a good solution if randomCard is the same as previous one
             if (randomCard.name !== name) {
+                dispatch(setLastMyCard(props))
                 dispatch(replaceCard({index, randomCard}))
             } else {
+                dispatch(setLastMyCard(props))
                 setRandomCard(getRandomArrayElement(allCards))
                 dispatch(replaceCard({index, randomCard}))
             }
             dispatch(changeTurn())
         }
     }
-
+    const nothing = () => {
+        return null
+    }
     return (
         <div className={styles.card}
-             onClick={cardClick}
+             onClick={used === "used" ? nothing : cardClick}
              style={{
                  background: `url(${picture}) no-repeat`,
                  backgroundSize: "cover"

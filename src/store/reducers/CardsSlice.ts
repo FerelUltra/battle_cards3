@@ -2,11 +2,14 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {shuffle, sortCards} from "../../helpers/sortCards";
 import {cards} from "../../data/cards";
 import {ICardsState, IReplaceCard} from "../../types/cardsReducer";
+import {ICard} from "../../types/cards";
 
 let initialState: ICardsState = {
     allCards: sortCards(cards),
     handCards: [],
-    enemyCards: sortCards(cards)
+    enemyCards: sortCards(cards),
+    lastMyCard: null,
+    lastEnemyCard: null,
 }
 export const cardsSlice = createSlice({
     name: 'cards',
@@ -20,9 +23,15 @@ export const cardsSlice = createSlice({
         },
         replaceCard: (state, action: PayloadAction<IReplaceCard>) =>{
             state.handCards[action.payload.index!] = action.payload.randomCard
-        }
+        },
+        setLastMyCard: (state, action: PayloadAction<ICard>) =>{
+            state.lastMyCard = action.payload
+        },
+        setLastEnemyCard: (state, action: PayloadAction<ICard>) =>{
+            state.lastEnemyCard = action.payload
+        },
     },
     extraReducers: {}
 })
-export const {shuffleCards, setHandCards, replaceCard} = cardsSlice.actions
+export const {shuffleCards, setHandCards, replaceCard, setLastMyCard, setLastEnemyCard} = cardsSlice.actions
 export default cardsSlice.reducer;

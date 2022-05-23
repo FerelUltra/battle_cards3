@@ -13,6 +13,7 @@ import {
     enemyRepairReducer
 } from "../../store/reducers/RocketsSlice";
 import {changeTurn} from "../../store/reducers/TurnSlice";
+import {LastCards} from "../LastCards";
 
 export const Battle: FC = () => {
     const myCurrentHealth = useAppSelector(state => state.rocketsReducer.myRocket.currentHealth)
@@ -59,6 +60,7 @@ export const Battle: FC = () => {
             {myCurrentHealth >= myMaxHealth || enemyCurrentHealth <= 0 ? <Popup victoryOrLoss={"victory"}/> : null}
             {myCurrentHealth <= 0 || enemyCurrentHealth >= enemyMaxHealth ? <Popup victoryOrLoss={"loss"}/> : null}
             <Turn/>
+            <LastCards/>
         </div>
     )
 }
