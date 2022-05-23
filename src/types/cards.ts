@@ -11,7 +11,8 @@ export interface ICard {
     decrease?: number,
     defenseIncrease?: number,
     defenseGenIncrease?: number,
-    index?: number | undefined
+    index?: number | undefined,
+    used?: typeUsed
 }
 
 export interface ICards {
@@ -24,3 +25,4 @@ type attackOrDefense = "attack" | "defense"
 export type typeEffect = "damage" | "radiation" | "attackIncrease" |
     "attackGenIncrease" | "sabotage" | "materialDecrease" | "repair" | "freeze" | "defenseIncrease" |
     "teleport" | "defenseGenIncrease"
+type typeUsed = "used" | "notUsed"

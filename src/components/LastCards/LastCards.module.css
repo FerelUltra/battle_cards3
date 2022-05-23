@@ -1,0 +1,10 @@
+@tailwind components;
+@tailwind utilities;
+
+
+.lastCards{
+    @apply absolute top-24 right-[calc(50%-24rem)] flex opacity-50
+}
+.lastCards *{
+    @apply cursor-default
+}

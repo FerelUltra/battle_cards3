@@ -2,12 +2,14 @@ import styles from './Popup.module.css'
 import {FC} from "react";
 import {useAppDispatch} from "../../hooks/redux";
 import {startNewGame} from "../../store/reducers/RocketsSlice";
-import {shuffleCards} from "../../store/reducers/CardsSlice";
+import {setLastEnemyCard, setLastMyCard, shuffleCards} from "../../store/reducers/CardsSlice";
 import {IPopupProps} from "../../types/popup";
 
 export const Popup: FC<IPopupProps> = ({victoryOrLoss}) => {
     const dispatch = useAppDispatch()
     const repeatGame = () => {
+        dispatch(setLastMyCard(null))
+        dispatch(setLastEnemyCard(null))
         dispatch(startNewGame())
         dispatch(shuffleCards())
         console.log('startNewGame')
