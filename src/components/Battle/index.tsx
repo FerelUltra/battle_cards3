@@ -14,6 +14,7 @@ import {
 } from "../../store/reducers/RocketsSlice";
 import {changeTurn} from "../../store/reducers/TurnSlice";
 import {LastCards} from "../LastCards";
+import {setLastEnemyCard} from "../../store/reducers/CardsSlice";
 
 export const Battle: FC = () => {
     const myCurrentHealth = useAppSelector(state => state.rocketsReducer.myRocket.currentHealth)
@@ -42,6 +43,7 @@ export const Battle: FC = () => {
                     case "defenseIncrease":
                         dispatch(enemyDefenseIncreaseReducer(randomEnemyCard.defenseIncrease))
                 }
+                dispatch(setLastEnemyCard(randomEnemyCard))
                 dispatch(changeTurn())
             }
         }, delay)

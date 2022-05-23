@@ -80,8 +80,9 @@ export const Card: FC<ICard> = ({
         <div className={styles.card}
              onClick={used === "used" ? nothing : cardClick}
              style={{
-                 background: `url(${picture}) no-repeat`,
-                 backgroundSize: "cover"
+                 backgroundImage: `url(${picture})`,
+                 backgroundSize: "cover",
+                 backgroundRepeat: "no-repeat"
              }}>
             <header className={styles.cardHeader} style={{
                 backgroundColor: `${type === "attack" ? "red" : "blue"}`,

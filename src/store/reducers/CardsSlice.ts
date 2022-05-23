@@ -24,10 +24,10 @@ export const cardsSlice = createSlice({
         replaceCard: (state, action: PayloadAction<IReplaceCard>) =>{
             state.handCards[action.payload.index!] = action.payload.randomCard
         },
-        setLastMyCard: (state, action: PayloadAction<ICard>) =>{
+        setLastMyCard: (state, action: PayloadAction<ICard | null>) =>{
             state.lastMyCard = action.payload
         },
-        setLastEnemyCard: (state, action: PayloadAction<ICard>) =>{
+        setLastEnemyCard: (state, action: PayloadAction<ICard | null>) =>{
             state.lastEnemyCard = action.payload
         },
     },
