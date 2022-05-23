@@ -1,18 +1,20 @@
 import styles from './Card.module.css'
-import {FC, MouseEventHandler, useState} from "react";
+import {FC, MouseEvent, useState} from "react";
 import {ICard} from "../../types/cards";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {
+    addTurnMaterial,
     attackIncreaseReducer,
     damageReducer,
     defenseIncreaseReducer,
-    repairReducer, wasteAttackReducer, wasteDefenseReducer
+    repairReducer,
+    wasteAttackReducer,
+    wasteDefenseReducer,
 } from "../../store/reducers/RocketsSlice";
 import {replaceCard, setLastMyCard} from "../../store/reducers/CardsSlice";
 import {getRandomArrayElement} from "../../helpers/randomElement";
 import {changeTurn} from "../../store/reducers/TurnSlice";
 import {pass} from "../../data/cards";
-import {MouseEvent} from "react";
 
 export const Card: FC<ICard> = ({
                                     type,
@@ -87,6 +89,7 @@ export const Card: FC<ICard> = ({
                 dispatch(replaceCard({index, randomCard}))
             }
             dispatch(changeTurn())
+            dispatch(addTurnMaterial())
             type === "defense" ?
                 dispatch(wasteDefenseReducer(price)) :
                 dispatch(wasteAttackReducer(price))

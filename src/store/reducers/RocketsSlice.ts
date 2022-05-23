@@ -59,6 +59,12 @@ export const rocketsSlice = createSlice({
                 defenseGen: 4
             }
         },
+        addTurnMaterial: (state)=>{
+            state.enemyRocket.attack += state.enemyRocket.attackGen
+            state.myRocket.attack += state.myRocket.attackGen
+            state.myRocket.defense += state.myRocket.defenseGen
+            state.enemyRocket.defense += state.enemyRocket.defenseGen
+        },
         enemyAttackIncreaseReducer: (state, action) => {
             state.enemyRocket.attack = state.enemyRocket.attack + action.payload
         },
@@ -93,6 +99,7 @@ export const {
     wasteDefenseReducer,
     wasteAttackReducer,
     enemyWasteDefenseReducer,
-    enemyWasteAttackReducer
+    enemyWasteAttackReducer,
+    addTurnMaterial
 } = rocketsSlice.actions
 export default rocketsSlice.reducer;

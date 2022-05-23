@@ -7,6 +7,7 @@ import {Popup} from "../Popup";
 import {Turn} from "../Turn";
 import {getRandomArrayElement} from "../../helpers/randomElement";
 import {
+    addTurnMaterial,
     enemyAttackIncreaseReducer,
     enemyDamageReducer,
     enemyDefenseIncreaseReducer,
@@ -51,12 +52,14 @@ export const Battle: FC = () => {
                 }
                 dispatch(setLastEnemyCard(randomEnemyCard))
                 dispatch(changeTurn())
+                dispatch(addTurnMaterial())
                 randomEnemyCard.type === "defense" ?
                     dispatch(enemyWasteDefenseReducer(randomEnemyCard.price)) :
                     dispatch(enemyWasteAttackReducer(randomEnemyCard.price))
             } else if(turn === "enemyTurn"){
                 dispatch(setLastEnemyCard(pass))
                 dispatch(changeTurn())
+                dispatch(addTurnMaterial())
             }
         }, delay)
         return () => {
