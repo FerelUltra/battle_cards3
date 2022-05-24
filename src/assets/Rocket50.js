@@ -10,7 +10,7 @@ const SvgRocket50 = (props) => (
   >
     <path
       style={{
-        fill: props.fill,
+        fill: "#d8d8d8",
         stroke: "#000",
       }}
       d="M176.253 291.971v2.025l.951 75.592-47.642 20.923 193.43-.338-33.35-21.935-1.906-76.267"

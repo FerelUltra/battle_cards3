@@ -1,3 +1,4 @@
+export { default as Bomb } from "./Bomb";
 export { default as Rocket100 } from "./Rocket100";
 export { default as Rocket25 } from "./Rocket25";
 export { default as Rocket50 } from "./Rocket50";

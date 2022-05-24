@@ -4,6 +4,7 @@ import SvgRocket50 from "../../assets/Rocket50";
 import {IYouOrEnemy} from "../../types/rocketInfo";
 import {RocketInfo} from "../RocketInfo";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import SVGBomb from "../../assets/Bomb"
 
 export const Rocket: FC<IYouOrEnemy> = ({youOrEnemy}) => {
     const dispatch = useAppDispatch();
@@ -13,7 +14,8 @@ export const Rocket: FC<IYouOrEnemy> = ({youOrEnemy}) => {
         attack,
         defense,
         attackGen,
-        defenseGen
+        defenseGen,
+        bombed
     } = useAppSelector(state => {
         return youOrEnemy === "you" ? state.rocketsReducer.myRocket : state.rocketsReducer.enemyRocket
     })
@@ -29,6 +31,13 @@ export const Rocket: FC<IYouOrEnemy> = ({youOrEnemy}) => {
                                 defense={defense}
                                 defenseGen={defenseGen}/>
                     <SvgRocket50 width="850px" height="850px" fill="green"/>
+                    {bombed ? <SVGBomb style={{
+                        position: 'absolute',
+                        top: "500px",
+                        right: "35%",
+                        width: "56px",
+                        height: "56px"
+                    }}/> : null}
                 </div> :
                 <div className={styles.rocket}>
                     <SvgRocket50 width="850px" height="850px" fill="red"/>
@@ -39,6 +48,13 @@ export const Rocket: FC<IYouOrEnemy> = ({youOrEnemy}) => {
                                 attackGen={attackGen}
                                 defense={defense}
                                 defenseGen={defenseGen}/>
+                    {bombed ? <SVGBomb style={{
+                            position: 'absolute',
+                            top: "500px",
+                            left: "35%",
+                            width: "56px",
+                            height: "56px"
+                        }}/> : null}
                 </div>
             }
 

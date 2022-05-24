@@ -1,18 +1,20 @@
 import styles from './Card.module.css'
-import {FC, MouseEventHandler, useState} from "react";
+import {FC, MouseEvent, useState} from "react";
 import {ICard} from "../../types/cards";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {
+    addTurnMaterial, attackGenIncreaseReducer,
     attackIncreaseReducer,
-    damageReducer,
-    defenseIncreaseReducer,
-    repairReducer, wasteAttackReducer, wasteDefenseReducer
+    damageReducer, defenseGenIncreaseReducer,
+    defenseIncreaseReducer, enemyDamageReducer, enemySabotageReducer, materialDecreaseReducer,
+    repairReducer, sabotageReducer, teleportReducer,
+    wasteAttackReducer,
+    wasteDefenseReducer,
 } from "../../store/reducers/RocketsSlice";
-import {replaceCard, setLastMyCard} from "../../store/reducers/CardsSlice";
+import {freezeEffect, radiationEffect, replaceCard, setLastMyCard} from "../../store/reducers/CardsSlice";
 import {getRandomArrayElement} from "../../helpers/randomElement";
 import {changeTurn} from "../../store/reducers/TurnSlice";
 import {pass} from "../../data/cards";
-import {MouseEvent} from "react";
 
 export const Card: FC<ICard> = ({
                                     type,
@@ -51,6 +53,7 @@ export const Card: FC<ICard> = ({
     const turn = useAppSelector(state => state.turnReducer.turn)
     const defense = useAppSelector(state => state.rocketsReducer.myRocket.defense)
     const attack = useAppSelector(state => state.rocketsReducer.myRocket.attack)
+    const bombed = useAppSelector(state => state.rocketsReducer.myRocket.bombed)
     const [randomCard, setRandomCard] = useState(getRandomArrayElement(allCards));
     const [inOrOut, setInOrOut] = useState(false)
     const mouseEnterHandler = () => {
@@ -69,13 +72,36 @@ export const Card: FC<ICard> = ({
                     dispatch(damageReducer(damage))
                     break
                 case "repair":
-                    dispatch(repairReducer(repair))
+                    bombed ? dispatch(enemyDamageReducer(5)) : dispatch(repairReducer(repair))
+                    dispatch(enemySabotageReducer(false))
                     break
                 case "attackIncrease":
                     dispatch(attackIncreaseReducer(attackIncrease))
                     break
                 case "defenseIncrease":
                     dispatch(defenseIncreaseReducer(defenseIncrease))
+                    break
+                case "attackGenIncrease":
+                    dispatch(attackGenIncreaseReducer(attackGenIncrease))
+                    break
+                case "defenseGenIncrease":
+                    dispatch(defenseGenIncreaseReducer(defenseGenIncrease))
+                    break
+                case "materialDecrease":
+                    dispatch(materialDecreaseReducer())
+                    break
+                case "teleport":
+                    dispatch(teleportReducer())
+                    break
+                case "sabotage":
+                    dispatch(sabotageReducer(true))
+                    break
+                case "radiation":
+                    dispatch(radiationEffect())
+                    break
+                case "freeze":
+                    dispatch(freezeEffect())
+                    break
             }
             //maybe not a good solution if randomCard is the same as previous one
             if (randomCard.name !== name) {
@@ -87,6 +113,7 @@ export const Card: FC<ICard> = ({
                 dispatch(replaceCard({index, randomCard}))
             }
             dispatch(changeTurn())
+            dispatch(addTurnMaterial())
             type === "defense" ?
                 dispatch(wasteDefenseReducer(price)) :
                 dispatch(wasteAttackReducer(price))

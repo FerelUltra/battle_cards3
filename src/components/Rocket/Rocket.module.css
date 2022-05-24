@@ -2,7 +2,7 @@
 @tailwind utilities;
 
 .rocket{
-    @apply flex flex-row
+    @apply flex flex-row relative
 }
 .healthLine{
     @apply w-full bg-gray-500 h-16 text-center text-3xl
