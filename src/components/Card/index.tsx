@@ -11,7 +11,7 @@ import {
     wasteAttackReducer,
     wasteDefenseReducer,
 } from "../../store/reducers/RocketsSlice";
-import {replaceCard, setLastMyCard} from "../../store/reducers/CardsSlice";
+import {freezeEffect, radiationEffect, replaceCard, setLastMyCard} from "../../store/reducers/CardsSlice";
 import {getRandomArrayElement} from "../../helpers/randomElement";
 import {changeTurn} from "../../store/reducers/TurnSlice";
 import {pass} from "../../data/cards";
@@ -95,6 +95,12 @@ export const Card: FC<ICard> = ({
                     break
                 case "sabotage":
                     dispatch(sabotageReducer(true))
+                    break
+                case "radiation":
+                    dispatch(radiationEffect())
+                    break
+                case "freeze":
+                    dispatch(freezeEffect())
                     break
             }
             //maybe not a good solution if randomCard is the same as previous one
