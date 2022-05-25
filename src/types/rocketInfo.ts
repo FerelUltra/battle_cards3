@@ -5,8 +5,10 @@ export interface IRocketInfoProps{
     attack: number,
     attackGen: number,
     defense: number,
-    defenseGen: number
+    defenseGen: number,
+    healthState: typeHealthState
 }
 export interface IYouOrEnemy{
     youOrEnemy: "you" | "enemy"
 }
+export type typeHealthState = "low" | "medium" | "high" | "full"
