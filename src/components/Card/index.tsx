@@ -3,11 +3,18 @@ import {FC, MouseEvent, useState} from "react";
 import {ICard} from "../../types/cards";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {
-    addTurnMaterial, attackGenIncreaseReducer,
+    addTurnMaterial,
+    attackGenIncreaseReducer,
     attackIncreaseReducer,
-    damageReducer, defenseGenIncreaseReducer,
-    defenseIncreaseReducer, enemyDamageReducer, enemySabotageReducer, materialDecreaseReducer,
-    repairReducer, sabotageReducer, teleportReducer,
+    damageReducer,
+    defenseGenIncreaseReducer,
+    defenseIncreaseReducer,
+    enemyDamageReducer,
+    enemySabotageReducer,
+    materialDecreaseReducer,
+    repairReducer,
+    sabotageReducer,
+    teleportReducer,
     wasteAttackReducer,
     wasteDefenseReducer,
 } from "../../store/reducers/RocketsSlice";
