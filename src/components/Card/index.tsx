@@ -70,6 +70,8 @@ export const Card: FC<ICard> = ({
         setInOrOut(false)
     }
     const cardClick = () => {
+        const audio: HTMLAudioElement = new Audio(`audio/${name}.m4a`)
+        audio.play()
         if (turn === "youTurn" && (
             type === "defense" && defense >= price ||
             type === "attack" && attack >= price
@@ -130,6 +132,8 @@ export const Card: FC<ICard> = ({
         return null
     }
     const passTurn = (event: MouseEvent<HTMLDivElement>) => {
+        const audio: HTMLAudioElement = new Audio(`audio/pass.m4a`)
+        audio.play()
         event.stopPropagation()
         dispatch(setLastMyCard(pass))
         dispatch(changeTurn())
